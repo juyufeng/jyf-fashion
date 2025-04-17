@@ -1,6 +1,6 @@
 import React from 'react';
 
-const containerStyle = {
+const boxStyle = {
   display: 'flex',
   alignItems: 'flex-start',
   justifyContent: 'flex-start',
@@ -28,7 +28,7 @@ interface FormRenderProps {
 
 const AiChatLayout: React.FC<FormRenderProps> = ({ avatar, children }) => {
   return (
-    <div style={containerStyle}>
+    <div style={boxStyle}>
       <img 
         style={avatarStyle} 
         draggable="false" 

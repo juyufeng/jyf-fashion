@@ -1,6 +1,6 @@
 import React from 'react';
 
-const containerStyle = {
+const welcomeStyle = {
   display: 'flex',
   alignItems: 'flex-start',
   justifyContent: 'flex-start',
@@ -32,7 +32,7 @@ const WelcomeCustom: React.FC<WelcomeCustomProps> = ({ icon, title, description 
     <section 
       role="region"
       aria-label="欢迎信息"
-      style={containerStyle}
+      style={welcomeStyle}
     >
       <img 
         style={avatarStyle} 

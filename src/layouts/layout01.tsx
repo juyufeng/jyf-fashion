@@ -1,40 +1,47 @@
 import React, { CSSProperties, ReactNode } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { useTranslation } from 'react-i18next';
 
 interface Layout01Props {
-  containerStyle?: CSSProperties;
+  aiStyle?: CSSProperties;
+  threeStyle?: CSSProperties;
   header?: ReactNode;
   menu?: ReactNode;
   content?: ReactNode;
   footer?: ReactNode;
-  overlay?: ReactNode;  // 改名为 overlay
+  overlay?: ReactNode;
+  threeContent?: ReactNode;
 }
 
+
 const Layout: React.FC<Layout01Props> = ({
-  containerStyle,
+  aiStyle,
+  threeStyle,
   header,
   menu,
   content,
   footer,
   overlay,
+  threeContent,
 }) => {
-  const { t } = useTranslation();
+
 
   return (
-    <div role="application" aria-label={t('layout.appLabel')}>
+    <div style={{ position: 'relative' }}>
+
       <ToastContainer role="alert" aria-live="polite" />
-      <div style={containerStyle}>
+
+      <div style={aiStyle}>
         {header}
-        <nav role="navigation" aria-label={t('layout.menuLabel')}>
-          {menu}
-        </nav>
-        <main role="main" aria-label={t('layout.mainContentLabel')}>
-          {content}
-        </main>
+        {menu}
+        {content}
         {footer}
         {overlay}
       </div>
+
+      <div style={ threeStyle }>
+        { threeContent }
+      </div>
+
     </div>
   );
 };

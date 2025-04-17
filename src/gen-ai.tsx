@@ -15,6 +15,7 @@ import { AbortType } from '@/enums/abort-type';
 import MainContainer from '@/components/main/main-container';
 import FooterContainer from '@/components/footer/footer-container';
 import OverlayContent from '@/components/overlay/overlay-content';
+import ThreeHome from '@/threes/three-home';
 
 function App() {
 
@@ -76,7 +77,8 @@ function App() {
   }, [parsedMessages]);
 
   const {
-    containerStyle,
+    aiStyle,
+    threeStyle,
     getContentMenuStyle,
   } = useAppStyle();
  
@@ -138,14 +140,18 @@ function App() {
 
   const overlayContent = <OverlayContent />;
 
+  const threeContent = <ThreeHome />;
+
   return (
     <Layout01
-      containerStyle={containerStyle}
+      aiStyle={aiStyle}
+      threeStyle={threeStyle}
       header={headerContent}
       menu={menuContent}
       content={mainContent}
       footer={footerContent}
       overlay={overlayContent} 
+      threeContent={threeContent}
     />
   );
 }

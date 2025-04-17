@@ -17,7 +17,7 @@ interface MarkdownRenderProps {
   isLocal?: boolean;
 }
 
-const containerStyle = {
+const boxStyle = {
   overflowX: 'auto',
 } as const;
 
@@ -42,7 +42,7 @@ const resultStyle = {
 
 const MarkdownRender: React.FC<MarkdownRenderProps> = ({ content, tipStr, isLocal=false }) => {
   return (
-    <div style={containerStyle}>
+    <div style={boxStyle}>
       {!content.isBack && (
         <div style={tipLoadingStyle} className="tip-loading">
           {tipStr}
