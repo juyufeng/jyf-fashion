@@ -27,8 +27,8 @@ export const THEME = {
   SIZES: {
     BREAKPOINT: 1200,
     MIN_WIDTH: {
-      MOBILE: 426,
-      DESKTOP: 500,
+      MOBILE: 375,
+      DESKTOP: 375,
     },
     AVATAR: {
       SIZE: 38,

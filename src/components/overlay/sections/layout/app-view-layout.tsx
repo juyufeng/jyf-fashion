@@ -1,6 +1,5 @@
 import { FC, ReactNode } from 'react';
 import { useAppStyle } from "@/styles/app.styles";
-import ViewStore from "@/stores/view-store";
 import LayoutStore from "@/stores/layout-store";
 
 interface AppViewLayoutProps {
