@@ -4,7 +4,7 @@ import type { StyleProps } from '@/types/style.definitions';
 
 export const useBottomStyles = (dimensions: Dimensions) => ({
   getBottomStyle: (params: StyleProps = {}) => ({
-    width: `${dimensions.width - (params.isShowMenu ? THEME.LAYOUT.MENU.WIDTH : 0)}px`,
+    width: `${dimensions.currentChatWidth - (params.isShowMenu ? THEME.LAYOUT.MENU.WIDTH : 0)}px`,
     height: `${THEME.LAYOUT.BOTTOM.HEIGHT}px`,
     position: 'absolute',
     bottom: '0px',

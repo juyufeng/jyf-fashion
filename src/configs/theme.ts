@@ -5,6 +5,7 @@ export const THEME = {
       BG_COLOR: 'rgb(231,246,240)',
     },
     MENU: {
+      // 左侧菜单宽度
       WIDTH: 200,
     },
     BOTTOM: {

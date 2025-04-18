@@ -3,7 +3,7 @@ import type { Dimensions } from '@/hooks/use-window-size';
 
 export const useNavStyles = (dimensions: Dimensions) => ({
   navStyle: {
-    width: `${dimensions.width}px`,
+    width: `${dimensions.currentChatWidth}px`,
     height: `${THEME.LAYOUT.NAV.HEIGHT}px`,
     position: 'absolute',
     top: 0,

@@ -4,7 +4,7 @@ import type { StyleProps } from '@/types/style.definitions';
 
 export const useContentStyles = (dimensions: Dimensions) => ({
   getContentStyle: (params: StyleProps = {}) => ({
-    width: `${dimensions.width - (params.isShowMenu ? THEME.LAYOUT.MENU.WIDTH : 0)}px`,
+    width: `${dimensions.currentChatWidth - (params.isShowMenu ? THEME.LAYOUT.MENU.WIDTH : 0)}px`,
     height: `${dimensions.height - THEME.LAYOUT.NAV.HEIGHT - THEME.LAYOUT.BOTTOM.HEIGHT}px`,
     position: 'absolute',
     top: `${THEME.LAYOUT.NAV.HEIGHT}px`,
