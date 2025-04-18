@@ -1,5 +1,5 @@
 import { useWindowSize } from '@/hooks/use-window-size';
-import { useContainerStyles } from '@/styles/modules/container.styles';
+import { useContainerStyles } from '@/styles/modules/layout.styles';
 import { useNavStyles } from '@/styles/modules/nav.styles';
 import { useContentStyles } from '@/styles/modules/content.styles';
 import { useBottomStyles } from '@/styles/modules/bottom.styles';
