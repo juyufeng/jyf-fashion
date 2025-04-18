@@ -38,9 +38,9 @@ const Layout: React.FC<Layout01Props> = ({
         {overlay}
       </div>
 
-      <div style={ threeStyle }>
+      {/* <div style={ threeStyle }>
         { threeContent }
-      </div>
+      </div> */}
 
     </div>
   );
