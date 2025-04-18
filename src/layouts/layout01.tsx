@@ -1,5 +1,7 @@
 import React, { CSSProperties, ReactNode } from 'react';
 import { ToastContainer } from 'react-toastify';
+import LayoutStore from "@/stores/layout-store";
+import { LayoutConfig } from "@/types/layout";
 
 interface Layout01Props {
   aiStyle?: CSSProperties;
@@ -12,6 +14,7 @@ interface Layout01Props {
   threeContent?: ReactNode;
 }
 
+const layoutModel: LayoutConfig = LayoutStore.fetchLayoutMode(LayoutStore.currentLayoutMode);
 
 const Layout: React.FC<Layout01Props> = ({
   aiStyle,
@@ -30,7 +33,10 @@ const Layout: React.FC<Layout01Props> = ({
 
       <ToastContainer role="alert" aria-live="polite" />
 
-      <div style={aiStyle}>
+      <div style={{
+        ...aiStyle,
+        display: layoutModel.visibleChatView ? 'block' : 'none',
+      }}>
         {header}
         {menu}
         {content}
@@ -38,9 +44,12 @@ const Layout: React.FC<Layout01Props> = ({
         {overlay}
       </div>
 
-      {/* <div style={ threeStyle }>
-        { threeContent }
-      </div> */}
+      <div style={{
+        ...threeStyle,
+        display: layoutModel.visibleDomainView? 'block' : 'none',
+      }}>
+        {threeContent}
+      </div>
 
     </div>
   );

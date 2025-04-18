@@ -45,7 +45,7 @@ const $store = observable({
    * @param modeName 布局模式名称
    * @returns {Object} 布局配置信息
    */
-  currentLayoutMode(modeName: LayoutModeType) {
+  fetchLayoutMode(modeName: LayoutModeType) {
     switch (modeName) {
       // 1.左侧聊天, 右侧业务层
       case LAYOUT_MODE.LEFT_CHAT_RIGHT_DOMAIN:
@@ -113,7 +113,13 @@ const $store = observable({
         };
     }
   },
+  // 当前布局模式
+  currentLayoutMode: LAYOUT_MODE.LEFT_CHAT_RIGHT_DOMAIN as LayoutModeType,
 
+  setCurrentLayoutMode(modeName: LayoutModeType) {
+    this.currentLayoutMode = modeName;
+  },
+  
   setShowForm(show: boolean) {
     this.showForm = show;
   },
