@@ -6,6 +6,7 @@ import ReqStore from "@/stores/req-store";
 import Form01Render from '@/components/render/form-render/form-01-render';
 import ChatStore from "@/stores/chat-store";
 import ViewStore from "@/stores/view-store";
+import LayoutStore from "@/stores/layout-store";
 
 interface FormSectionProps {
   onRequest: (message: string) => void;

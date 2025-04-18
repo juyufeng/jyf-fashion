@@ -3,12 +3,12 @@ import ThreeColumnLayout from '@/components/overlay/sections/layout/three-column
 import SettingLeft from '@/components/overlay/sections/seciton-pages/setting/setting-left';
 import SettingMiddle from '@/components/overlay/sections/seciton-pages/setting/setting-middle';
 import SettingRight from '@/components/overlay/sections/seciton-pages/setting/setting-right';
-import ViewStore from '@/stores/view-store';
+import LayoutStore from "@/stores/layout-store";
 import { useAppStyle } from "@/styles/app.styles";
 
 const OverlaySections: FC = () => {
   const { overlayStyle } = useAppStyle();
-  const overlay = overlayStyle({ isShowMenu: ViewStore.isMenuVisible() });
+  const overlay = overlayStyle({ isShowMenu: LayoutStore.isMenuVisible() });
 
   return (
     <ThreeColumnLayout

@@ -7,6 +7,7 @@ import { observer } from "mobx-react-lite";
 import { AISenderPlaceholder } from "@/configs/index";
 import { useTranslation } from 'react-i18next';
 import ViewStore from "@/stores/view-store";
+import LayoutStore from "@/stores/layout-store";
 
 
 interface FooterContainerProps {
@@ -28,7 +29,7 @@ const FooterContainer: FC<FooterContainerProps> = ({
   } = useAppStyle();
 
   return (
-    <footer style={getBottomStyle({ isShowMenu: ViewStore.isMenuVisible() })}
+    <footer style={getBottomStyle({ isShowMenu: LayoutStore.isMenuVisible() })}
     >
       <div style={footerContainerStyle}>
         <Sender

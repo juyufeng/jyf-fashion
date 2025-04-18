@@ -1,6 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { useAppStyle } from "@/styles/app.styles";
 import ViewStore from "@/stores/view-store";
+import LayoutStore from "@/stores/layout-store";
 
 interface AppViewLayoutProps {
   children: ReactNode;
@@ -8,7 +9,7 @@ interface AppViewLayoutProps {
 
 const AppViewLayout: FC<AppViewLayoutProps> = ({ children }) => {
   const { overlayStyle, getMinAppWidth, getAppNavHeight } = useAppStyle();
-  const overlay = overlayStyle({ isShowMenu: ViewStore.isMenuVisible() });
+  const overlay = overlayStyle({ isShowMenu: LayoutStore.isMenuVisible() });
   const minAppWidth = getMinAppWidth();
   const appContentHeight = Number(overlay.height) - getAppNavHeight();
 

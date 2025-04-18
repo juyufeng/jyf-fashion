@@ -8,6 +8,7 @@ import { useAIChat } from '@/hooks/use-ai-chat';
 
 import ChatStore from "@/stores/chat-store";
 import ViewStore from "@/stores/view-store";
+import LayoutStore from "@/stores/layout-store";
 import RouterStore from '@/stores/router-store';
 
 import { useAppStyle } from "@/styles/app.styles";
@@ -86,7 +87,7 @@ function App() {
 
   const menuContent = (
     <MenuContent 
-      contentMenuStyle={getContentMenuStyle({ isShowMenu: ViewStore.isMenuVisible() })}
+      contentMenuStyle={getContentMenuStyle({ isShowMenu: LayoutStore.isMenuVisible() })}
       onLeftItemClick={(chatId) => {
         RouterStore.closeOverlay();
         ViewStore.messageRefscrollToBottom();

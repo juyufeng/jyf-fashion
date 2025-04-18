@@ -5,6 +5,7 @@ import ChatStore from "@/stores/chat-store";
 import { sections } from '@/routers/layout/sections';
 import LoadingComponent from '@/components/common/loading/loading';
 import ViewStore from "@/stores/view-store";
+import LayoutStore from "@/stores/layout-store";
 import ScrollTopSection from '@/components/main/sections/scroll-top-section';
 
 const WelcomeSection = lazy(sections.welcome);
@@ -24,7 +25,7 @@ const MainContainer: FC<MainContainerProps> = ({ onRequest }) => {
 
   if (ChatStore.showSkeleton) {
     return (
-      <div style={getContentStyle({ isShowMenu: ViewStore.isMenuVisible() })}>
+      <div style={getContentStyle({ isShowMenu: LayoutStore.isMenuVisible() })}>
         <Suspense fallback={<LoadingComponent />}>
           <SkeletonSection />
         </Suspense>
@@ -35,7 +36,7 @@ const MainContainer: FC<MainContainerProps> = ({ onRequest }) => {
   return (
     <div 
       ref={containerRef}
-      style={getContentStyle({ isShowMenu: ViewStore.isMenuVisible() })}
+      style={getContentStyle({ isShowMenu: LayoutStore.isMenuVisible() })}
     >
       <Suspense fallback={<LoadingComponent />}>
         <WelcomeSection />

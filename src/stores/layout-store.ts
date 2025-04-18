@@ -86,6 +86,11 @@ const $store = observable({
         };
     }
   },
+
+  isMenuVisible() {
+    return false;
+  },
+  
   // 当前布局模式
   currentLayoutMode: LAYOUT_MODE.LEFT_CHAT_RIGHT_DOMAIN as LayoutModeType,
 

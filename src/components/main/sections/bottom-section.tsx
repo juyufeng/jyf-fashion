@@ -5,6 +5,7 @@ import { getPromptItems, promptStyles } from "@/components/common/probtn";
 import { useAppStyle } from "@/styles/app.styles";
 import ChatStore from "@/stores/chat-store";
 import ViewStore from "@/stores/view-store";
+import LayoutStore from "@/stores/layout-store";
 import ReqStore from "@/stores/req-store";
 import { AbortType } from '@/enums/abort-type';
 import { useTranslation } from 'react-i18next';

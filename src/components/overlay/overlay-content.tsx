@@ -2,12 +2,12 @@ import { FC, Suspense } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useAppStyle } from "@/styles/app.styles";
 import LoadingComponent from '@/components/common/loading/loading';
-import ViewStore from '@/stores/view-store';
+import LayoutStore from "@/stores/layout-store";
 import RouterStore from '@/stores/router-store';
 
 const OverlayContent: FC = observer(() => {
   const { overlayStyle } = useAppStyle();
-  const overlay = overlayStyle({ isShowMenu: ViewStore.isMenuVisible() });
+  const overlay = overlayStyle({ isShowMenu: LayoutStore.isMenuVisible() });
   const { overlayState } = RouterStore;
 
   if (!overlayState.visible) return null;
