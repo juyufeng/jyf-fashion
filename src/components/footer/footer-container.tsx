@@ -28,10 +28,7 @@ const FooterContainer: FC<FooterContainerProps> = ({
   } = useAppStyle();
 
   return (
-    <footer 
-      role="contentinfo"
-      aria-label={t('footer.messageInput.area')}
-      style={getBottomStyle({ isShowMenu: ViewStore.isMenuVisible() })}
+    <footer style={getBottomStyle({ isShowMenu: ViewStore.isMenuVisible() })}
     >
       <div style={footerContainerStyle}>
         <Sender
@@ -45,19 +42,16 @@ const FooterContainer: FC<FooterContainerProps> = ({
           }}
           loading={ReqStore.chatting}
           style={senderStyle}
-          aria-label={t('footer.messageInput.placeholder')}
           actions={(_, info) => {
             const { SendButton, LoadingButton } = info.components;
             return ReqStore.chatting ? (
               <LoadingButton
                 onClick={loadingButtonStop}
                 style={loadingButtonStyle}
-                aria-label={t('footer.messageInput.stop')}
               />
             ) : (
               <SendButton
                 style={sendButtonStyle}
-                aria-label={t('footer.messageInput.send')}
               />
             );
           }}

@@ -41,11 +41,7 @@ const HeaderContent: FC = () => {
   }
 
   return (
-    <header 
-      role="banner"
-      aria-label={t('header.ariaLabel')}
-      style={navStyle}
-    >
+    <header style={navStyle}>
       <div style={navIconStyle}>
         <img
           style={{ marginRight: 10, marginLeft: 10 }}

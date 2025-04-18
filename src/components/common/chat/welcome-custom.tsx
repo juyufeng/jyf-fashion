@@ -29,11 +29,7 @@ interface WelcomeCustomProps {
 
 const WelcomeCustom: React.FC<WelcomeCustomProps> = ({ icon, title, description }) => {
   return (
-    <section 
-      role="region"
-      aria-label="欢迎信息"
-      style={welcomeStyle}
-    >
+    <section style={welcomeStyle}>
       <img 
         style={avatarStyle} 
         draggable="false" 
