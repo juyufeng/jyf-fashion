@@ -14,7 +14,7 @@ export const CameraControls: React.FC<CameraControlsProps> = ({ is2D }) => {
   const orthoRef = useRef<THREE.OrthographicCamera>(null);
   const perspRef = useRef<THREE.PerspectiveCamera>(null);
   
-  const { camera, set } = useThree();
+  const { camera, set } = useThree(); 
 
   useEffect(() => {
     if (is2D && orthoRef.current) {
