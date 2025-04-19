@@ -70,7 +70,7 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
         left: 0,
         top: 0,
         pointerEvents: 'none',
-        zIndex: 9999,
+        zIndex: 101,
         backgroundColor: 'transparent' // 移除调试背景
       }}
     />
