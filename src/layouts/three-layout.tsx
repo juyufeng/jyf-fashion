@@ -1,4 +1,9 @@
 import React, { CSSProperties, ReactNode } from 'react';
+import { THREE_LAYOUT } from '@/configs/three-layout';
+const NavHeight = THREE_LAYOUT.NAV.HEIGHT;
+const BottomHeight = THREE_LAYOUT.BOTTOM.HEIGHT;
+const LeftWidth = THREE_LAYOUT.LEFT.WIDTH;
+const RightWidth = THREE_LAYOUT.RIGHT.WIDTH;
 
 interface ThreeLayoutProps {
   top?: ReactNode;
@@ -7,11 +12,6 @@ interface ThreeLayoutProps {
   right?: ReactNode;
   center?: ReactNode;
 }
-
-const NavHeight = 44;
-const BottomHeight = 44;
-const LeftWidth = 44;
-const RightWidth = 44;
 
 const ThreeLayout: React.FC<ThreeLayoutProps> = ({
   top,
@@ -82,7 +82,8 @@ const ThreeLayout: React.FC<ThreeLayoutProps> = ({
         top: `${NavHeight}px`,
         width: `calc(100% - ${LeftWidth + RightWidth}px)`,
         height: `calc(100% - ${NavHeight + BottomHeight}px)`,
-        background: 'yellow'
+        background: 'white',
+        overflow: 'auto',
       }}>
         {center}
       </div>
