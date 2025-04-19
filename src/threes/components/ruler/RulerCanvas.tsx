@@ -11,7 +11,7 @@ interface RulerCanvasProps {
 }
 
 const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanvasProps) => {
-  const canvasRef = useRef<any>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useRulerSync(canvasRef, mainCamera, controls, $store.rulerStore);
 
@@ -26,22 +26,28 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
       ctx.font = '10px Arial';
       ctx.fillStyle = '#000';
 
+      const zoom = mainCamera.zoom || 1;
+      const offsetX = mainCamera.position.x || 0;
+      const offsetY = mainCamera.position.y || 0;
+
       // 绘制水平标尺
-      for (let x = 0; x < width; x += 50) {
+      for (let x = -offsetX; x < width / zoom; x += 50 / zoom) {
+        const screenX = x * zoom + offsetX;
         ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, 10);
+        ctx.moveTo(screenX, 0);
+        ctx.lineTo(screenX, 10);
         ctx.stroke();
-        ctx.fillText(`${x}`, x + 2, 10);
+        ctx.fillText(`${Math.round(x)}`, screenX + 2, 10);
       }
 
       // 绘制垂直标尺
-      for (let y = 0; y < height; y += 50) {
+      for (let y = -offsetY; y < height / zoom; y += 50 / zoom) {
+        const screenY = y * zoom + offsetY;
         ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(10, y);
+        ctx.moveTo(0, screenY);
+        ctx.lineTo(10, screenY);
         ctx.stroke();
-        ctx.fillText(`${y}`, 2, y + 10);
+        ctx.fillText(`${Math.round(y)}`, 2, screenY + 10);
       }
     };
 
@@ -56,7 +62,7 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [width, height]);
+  }, [width, height, mainCamera]);
 
   return (
     <canvas
@@ -71,7 +77,7 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
         top: 0,
         pointerEvents: 'none',
         zIndex: 101,
-        backgroundColor: 'transparent' // 移除调试背景
+        backgroundColor: 'transparent'
       }}
     />
   );
