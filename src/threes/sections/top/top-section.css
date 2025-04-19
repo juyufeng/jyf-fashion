@@ -9,5 +9,23 @@
   line-height: 20px;
   height: 20px;
   margin-right: 12px;
+  min-width: 30px;
+  overflow: hidden;
   cursor: pointer;
+}
+
+.top-section-content {
+    width: 100%;
+    height: calc(100% - 20px);
+    background: rgb(212, 208, 200); /* 经典的 Windows 95 背景色 */
+    border: 2px solid #808080; /* 深灰色边框 */
+    border-top: none; /* 去掉顶部边框 */
+    box-shadow: inset 1px 1px #fff, inset -1px -1px #404040; /* 内部阴影效果 */
+    font-size: 12px; /* 小字体 */
+    color: #000; /* 黑色字体 */
+    box-sizing: border-box; /* 包含内边距和边框 */
+    display: flex;
+    align-items: center;
+    border-left: none;
+    border-right: none;
 }
