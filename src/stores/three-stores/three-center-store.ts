@@ -1,7 +1,7 @@
 import { observable } from "mobx";
 
-const $store = observable({
+const $threeCenterStore = observable({
   
 });
 
-export default $store;
+export default $threeCenterStore;
