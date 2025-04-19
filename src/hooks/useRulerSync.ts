@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import * as THREE from 'three';
 
 export default function useRulerSync(
-  canvasRef: React.RefObject<HTMLCanvasElement | null>, // 修改为允许null
-  camera: any,
+  canvasRef: React.RefObject<HTMLCanvasElement>,
+  camera: THREE.Camera,
   controls: any,
   rulerStore: any
 ) {
@@ -16,7 +16,7 @@ export default function useRulerSync(
     const handleSync = () => {
       const { width, height } = canvasRef.current!;
       ctx.clearRect(0, 0, width, height);
-      
+
       // 根据相机状态重绘标尺
       if (camera instanceof THREE.OrthographicCamera) {
         const zoom = camera.zoom;
