@@ -4,6 +4,7 @@ import { OrthographicCamera, PerspectiveCamera, OrbitControls as DreiOrbitContro
 import * as THREE from 'three';
 import { useKeyboardControls } from '@/hooks/useKeyboardControls'; // 引入自定义 Hook
 import { useWheelZoom } from '@/hooks/useWheelZoom'; // 引入新的自定义 Hook
+import { useSpaceDrag } from '@/hooks/useSpaceDrag'; // 引入空格拖动 Hook
 
 interface CameraControlsProps {
   is2D: boolean;
@@ -27,6 +28,7 @@ export const CameraControls: React.FC<CameraControlsProps> = ({ is2D }) => {
 
   useKeyboardControls(camera); // 使用自定义 Hook
   useWheelZoom(camera); // 使用新的自定义 Hook
+  useSpaceDrag(camera, controlsRef); // 使用空格拖动 Hook
 
   return (
     <>
@@ -45,8 +47,8 @@ export const CameraControls: React.FC<CameraControlsProps> = ({ is2D }) => {
       <DreiOrbitControls
         ref={controlsRef}
         camera={camera}
-        enableRotate={!is2D}
-        enablePan={true}
+        enableRotate={!is2D} // 禁止旋转在2D模式下
+        enablePan={false} // 初始禁用平移，由 useSpaceDrag 控制
         enableZoom={true}
         minZoom={0.1}
         maxZoom={10}
