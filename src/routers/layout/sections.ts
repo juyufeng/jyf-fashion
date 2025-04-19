@@ -4,7 +4,8 @@ export const sections = {
   current: () => import('@/components/main/sections/current-chat-section'),
   bottom: () => import('@/components/main/sections/bottom-section'),
   form: () => import('@/components/main/sections/form-section'),
-  skeleton: () => import('@/components/main/sections/skeleton-section')
+  skeleton: () => import('@/components/main/sections/skeleton-section'),
+  
 } as const;
 
 export type SectionKeys = keyof typeof sections;
