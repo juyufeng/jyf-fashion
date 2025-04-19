@@ -1,10 +1,15 @@
 import React from 'react';
+import ThreeLayout from '@/layouts/three-layout';
 
 const ThreeHome = () => {
   return (
-    <div>
-      1111
-    </div>
+    <ThreeLayout
+      top="上"
+      bottom="下"
+      left="左"
+      right="右"
+      center="11221"
+    />
   );
 };
 
