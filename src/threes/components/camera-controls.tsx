@@ -5,12 +5,13 @@ import * as THREE from 'three';
 import { useKeyboardControls } from '@/hooks/useKeyboardControls'; // 引入自定义 Hook
 import { useWheelZoom } from '@/hooks/useWheelZoom'; // 引入新的自定义 Hook
 import { useSpaceDrag } from '@/hooks/useSpaceDrag'; // 引入空格拖动 Hook
+import { forwardRef } from 'react';
 
 interface CameraControlsProps {
   is2D: boolean;
 }
 
-export const CameraControls: React.FC<CameraControlsProps> = ({ is2D }) => {
+export const CameraControls = forwardRef<any, CameraControlsProps>(({ is2D }, ref) => {
   const controlsRef = useRef<any>(null);
   const orthoRef = useRef<THREE.OrthographicCamera>(null);
   const perspRef = useRef<THREE.PerspectiveCamera>(null);
@@ -30,6 +31,17 @@ export const CameraControls: React.FC<CameraControlsProps> = ({ is2D }) => {
   useWheelZoom(camera); // 使用新的自定义 Hook
   useSpaceDrag(camera, controlsRef); // 使用空格拖动 Hook
 
+  // 同步forwardRef和内部ref
+  useEffect(() => {
+    if (ref) {
+      if (typeof ref === 'function') {
+        ref(controlsRef.current);
+      } else {
+        ref.current = controlsRef.current;
+      }
+    }
+  }, [ref]);
+
   return (
     <>
       <OrthographicCamera
@@ -47,8 +59,8 @@ export const CameraControls: React.FC<CameraControlsProps> = ({ is2D }) => {
       <DreiOrbitControls
         ref={controlsRef}
         camera={camera}
-        enableRotate={!is2D} // 禁止旋转在2D模式下
-        enablePan={false} // 初始禁用平移，由 useSpaceDrag 控制
+        enableRotate={!is2D}
+        enablePan={false}
         enableZoom={true}
         minZoom={0.1}
         maxZoom={10}
@@ -60,4 +72,4 @@ export const CameraControls: React.FC<CameraControlsProps> = ({ is2D }) => {
       <Html position={[0, 0, 110]} center style={{ color: 'blue', fontWeight: 'bold' }}>Z</Html>
     </>
   );
-};
+});

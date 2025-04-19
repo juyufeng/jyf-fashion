@@ -1,6 +1,7 @@
 import type { Dimensions } from '@/hooks/use-window-size';
 import LayoutStore from "@/stores/layout-store";
 import { LAYOUT_MODE } from '@/constants/layout';
+import { THREE_LAYOUT } from '@/configs/three-layout';
 
 // AI聊天视图固定宽度
 const FIXED_V_WIDTH = 375;
@@ -76,6 +77,10 @@ export const domainWidth = (dimensions: Dimensions) => {
   }
 };
 
+export const domainHeight = (dimensions: Dimensions) => {
+  return dimensions.height;
+};
+
 export const domainLeft = (dimensions: Dimensions) => {
   const layoutConfig = LayoutStore.fetchLayoutMode(LayoutStore.currentLayoutMode);
 
@@ -109,3 +114,11 @@ export const domainLeft = (dimensions: Dimensions) => {
       return 0;
   }
 };
+
+export const domainCenterWidth = (dimensions: Dimensions) => {
+  return domainWidth(dimensions) - THREE_LAYOUT.LEFT.WIDTH - THREE_LAYOUT.RIGHT.WIDTH;
+}
+
+export const domainCenterHeight = (dimensions: Dimensions) => {
+  return domainHeight(dimensions) - THREE_LAYOUT.NAV.HEIGHT - THREE_LAYOUT.BOTTOM.HEIGHT;
+}

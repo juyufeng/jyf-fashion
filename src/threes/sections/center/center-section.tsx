@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { InfiniteGrid } from '@/threes/components/infinite-grid';
 import { CameraControls } from '@/threes/components/camera-controls';
+import RulerCanvas from '@/threes/components/ruler/RulerCanvas';
+import { useWindowSize } from '@/hooks/use-window-size';
 
 const CenterSection = () => {
   const [is2D, setIs2D] = useState(true);
+  const controlsRef = useRef<any>(null);
+  const { centerWidth, centerHeight } = useWindowSize();
 
   return (
     <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+      <RulerCanvas
+        width={centerWidth}
+        height={centerHeight}
+        mainCamera={controlsRef.current?.object}
+        controls={controlsRef.current}
+      />
       <button
         style={{ position: 'absolute', zIndex: 10, left: 20, top: 20 }}
         onClick={() => setIs2D(v => !v)}
@@ -23,7 +33,7 @@ const CenterSection = () => {
         }
         style={{ width: '100%', height: '100%' }}
       >
-        <CameraControls is2D={is2D} />
+        <CameraControls is2D={is2D} ref={controlsRef} />
         <InfiniteGrid cellSize={20} color={0x888888} fade thickness={1} />
       </Canvas>
     </div>
