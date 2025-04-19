@@ -49,7 +49,7 @@ const CenterSection = () => {
         style={{ position: 'absolute', zIndex: 10, left: 20, top: 20 }}
         onClick={() => setIs2D(v => !v)}
       >
-        切换{is2D ? '2D' : '3D'}
+        当前{is2D ? '2D' : '3D'}
       </button>
       <Canvas
         orthographic={is2D}
