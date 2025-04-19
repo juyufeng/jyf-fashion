@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { GridHelper } from '@/threes/components/grid-helper';
+import { InfiniteGrid } from '@/threes/components/infinite-grid';
 import { CameraControls } from '@/threes/components/camera-controls';
 
 import type { Dimensions } from '@/hooks/use-window-size';
@@ -63,7 +63,7 @@ const CenterSection = () => {
         style={{ width: '100%', height: '100%' }}
       >
         <CameraControls is2D={is2D} />
-        <GridHelper size={gridSize} divisions={divisions} color1={color1} color2={color2} />
+        <InfiniteGrid cellSize={20} color={0x888888} fade thickness={1} />
       </Canvas>
     </div>
   );
