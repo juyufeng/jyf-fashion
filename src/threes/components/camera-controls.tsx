@@ -25,7 +25,11 @@ export const CameraControls: React.FC<CameraControlsProps> = ({ is2D }) => {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.ctrlKey && event.key === '0') {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMac = userAgent.includes('mac');
+      const isCtrlOrCmd = isMac ? event.metaKey : event.ctrlKey;
+
+      if (isCtrlOrCmd && event.key === '0') {
         // 缩放重置
         camera.zoom = 1;
         camera.updateProjectionMatrix();
