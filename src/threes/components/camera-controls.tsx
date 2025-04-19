@@ -23,6 +23,31 @@ export const CameraControls: React.FC<CameraControlsProps> = ({ is2D }) => {
     controlsRef.current?.update();
   }, [is2D, set]);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.key === '0') {
+        // 缩放重置
+        camera.zoom = 1;
+        camera.updateProjectionMatrix();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [camera]);
+
+  useEffect(() => {
+    const handleWheel = (event: WheelEvent) => {
+      // 滚轮缩放
+      const zoomFactor = event.deltaY > 0 ? 0.9 : 1.1;
+      camera.zoom *= zoomFactor;
+      camera.updateProjectionMatrix();
+    };
+
+    window.addEventListener('wheel', handleWheel);
+    return () => window.removeEventListener('wheel', handleWheel);
+  }, [camera]);
+
   return (
     <>
       <OrthographicCamera
