@@ -2,6 +2,8 @@ import { useThree, useFrame } from '@react-three/fiber';
 import { useRef, useEffect } from 'react';
 import { OrthographicCamera, PerspectiveCamera, OrbitControls as DreiOrbitControls, Html } from '@react-three/drei';
 import * as THREE from 'three';
+import { useKeyboardControls } from '@/hooks/useKeyboardControls'; // 引入自定义 Hook
+import { useWheelZoom } from '@/hooks/useWheelZoom'; // 引入新的自定义 Hook
 
 interface CameraControlsProps {
   is2D: boolean;
@@ -23,34 +25,8 @@ export const CameraControls: React.FC<CameraControlsProps> = ({ is2D }) => {
     controlsRef.current?.update();
   }, [is2D, set]);
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      const userAgent = navigator.userAgent.toLowerCase();
-      const isMac = userAgent.includes('mac');
-      const isCtrlOrCmd = isMac ? event.metaKey : event.ctrlKey;
-
-      if (isCtrlOrCmd && event.key === '0') {
-        // 缩放重置
-        camera.zoom = 1;
-        camera.updateProjectionMatrix();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [camera]);
-
-  useEffect(() => {
-    const handleWheel = (event: WheelEvent) => {
-      // 滚轮缩放
-      const zoomFactor = event.deltaY > 0 ? 0.9 : 1.1;
-      camera.zoom *= zoomFactor;
-      camera.updateProjectionMatrix();
-    };
-
-    window.addEventListener('wheel', handleWheel);
-    return () => window.removeEventListener('wheel', handleWheel);
-  }, [camera]);
+  useKeyboardControls(camera); // 使用自定义 Hook
+  useWheelZoom(camera); // 使用新的自定义 Hook
 
   return (
     <>
