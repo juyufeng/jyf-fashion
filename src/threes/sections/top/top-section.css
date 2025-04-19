@@ -29,3 +29,8 @@
     border-left: none;
     border-right: none;
 }
+
+.ant-dropdown-menu {
+    border-radius: 0 !important; /* 使用 !important 确保生效 */
+    font-size: 12px;
+}
