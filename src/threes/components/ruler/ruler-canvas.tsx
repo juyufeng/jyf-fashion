@@ -2,18 +2,17 @@ import React, { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import $store from '@/stores/three-store';
 import useRulerSync from '@/hooks/use-ruler-sync';
-import { rulerConfig } from '@/threes/components/ruler/ruler-config'; // 导入配置
-import { debounce } from '@/utils/util'; // 导入防抖函数
+import { rulerConfig } from '@/threes/components/ruler/ruler-config';
+import { debounce } from '@/utils/util';
 
 interface RulerCanvasProps {
   width: number;
   height: number;
   mainCamera: any;
   controls: any;
-  visible: boolean; // 新增：控制标尺可见性
+  visible: boolean;
 }
 
-// 物理设备缩放比
 const DPR = window.devicePixelRatio || 1;
 
 const RulerCanvas = observer(({ width, height, mainCamera, controls, visible }: RulerCanvasProps) => {
@@ -36,6 +35,7 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls, visible }: 
     }, 200);
 
     const drawRuler = () => {
+      const scale = $store.scale; // 使用全局状态中的缩放比例
       ctx.clearRect(0, 0, width, height);
       ctx.fillStyle = rulerConfig.backgroundColor;
       ctx.fillRect(0, 0, width, rulerConfig.tickLength);
@@ -55,23 +55,23 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls, visible }: 
         ctx.shadowColor = 'transparent';
       }
 
-      for (let x = 0; x < width; x += rulerConfig.tickSpacing) {
+      for (let x = 0; x < width; x += rulerConfig.tickSpacing * scale) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
         ctx.lineTo(x, rulerConfig.tickLength);
         ctx.stroke();
-        if (x % rulerConfig.textInterval === 0) {
-          ctx.fillText(`${(x / rulerConfig.tickSpacing).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, x + rulerConfig.textOffsetX, rulerConfig.tickLength + rulerConfig.textPaddingX);
+        if (x % (rulerConfig.textInterval * scale) === 0) {
+          ctx.fillText(`${(x / (rulerConfig.tickSpacing * scale)).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, x + rulerConfig.textOffsetX, rulerConfig.tickLength + rulerConfig.textPaddingX);
         }
       }
 
-      for (let y = 0; y < height; y += rulerConfig.tickSpacing) {
+      for (let y = 0; y < height; y += rulerConfig.tickSpacing * scale) {
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(rulerConfig.tickLength, y);
         ctx.stroke();
-        if (y % rulerConfig.textInterval === 0) {
-          ctx.fillText(`${(y / rulerConfig.tickSpacing).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, 2 + rulerConfig.textPaddingY, y + rulerConfig.textOffsetY);
+        if (y % (rulerConfig.textInterval * scale) === 0) {
+          ctx.fillText(`${(y / (rulerConfig.tickSpacing * scale)).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, 2 + rulerConfig.textPaddingY, y + rulerConfig.textOffsetY);
         }
       }
     };
@@ -80,7 +80,7 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls, visible }: 
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [width, height, visible]);
+  }, [width, height, visible, $store.scale]);
 
   return visible ? (
     <canvas

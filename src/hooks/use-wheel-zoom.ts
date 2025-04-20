@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import * as THREE from 'three';
+import $store from '@/stores/three-store'; // 导入 store
 
 export const useWheelZoom = (camera: THREE.Camera) => {
   useEffect(() => {
@@ -9,6 +10,7 @@ export const useWheelZoom = (camera: THREE.Camera) => {
       if (camera instanceof THREE.OrthographicCamera) {
         camera.zoom *= zoomFactor;
         camera.updateProjectionMatrix();
+        $store.setScale(camera.zoom); // 更新缩放比例到store
       }
     };
 

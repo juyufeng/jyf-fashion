@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import * as THREE from 'three';
+import $store from '@/stores/three-store'; // 导入 store
 
 export const useKeyboardControls = (camera: THREE.Camera) => {
   useEffect(() => {
@@ -13,6 +14,7 @@ export const useKeyboardControls = (camera: THREE.Camera) => {
         if (camera instanceof THREE.OrthographicCamera) {
           camera.zoom = 1;
           camera.updateProjectionMatrix();
+          $store.setScale(camera.zoom); // 更新缩放比例到store
         }
       }
     };

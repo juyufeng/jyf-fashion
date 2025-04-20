@@ -2,11 +2,10 @@ import { useThree, useFrame } from '@react-three/fiber';
 import { useRef, useEffect } from 'react';
 import { OrthographicCamera, PerspectiveCamera, OrbitControls as DreiOrbitControls, Html } from '@react-three/drei';
 import * as THREE from 'three';
-import { useWheelZoom } from '@/hooks/use-wheel-zoom';
 import { useKeyboardControls } from '@/hooks/use-keyboard-controls';
 import { useSpaceDrag } from '@/hooks/use-space-drag';
 import { forwardRef } from 'react';
-
+import $store from '@/stores/three-store'; // 导入 store
 
 interface CameraControlsProps {
   is2D: boolean;
@@ -28,10 +27,46 @@ export const CameraControls = forwardRef<any, CameraControlsProps>(({ is2D }, re
     controlsRef.current?.update();
   }, [is2D, set]);
 
-  useWheelZoom(camera);
   useKeyboardControls(camera);
   useSpaceDrag(camera, controlsRef);
- 
+
+  useEffect(() => {
+    const handleWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      if (camera instanceof THREE.OrthographicCamera) {
+        const zoomFactor = 1.1;
+        camera.zoom *= event.deltaY > 0 ? 1 / zoomFactor : zoomFactor;
+        camera.updateProjectionMatrix();
+        $store.setScale(camera.zoom); // 更新缩放比例到store
+      } else if (camera instanceof THREE.PerspectiveCamera) {
+        camera.position.z += event.deltaY * 0.1;
+        $store.setScale(camera.position.z); // 更新缩放比例到store
+      }
+      controlsRef.current?.update();
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isMac = userAgent.includes('mac');
+      const isCtrlOrCmd = isMac ? event.metaKey : event.ctrlKey;
+
+      if (isCtrlOrCmd && event.key === '0') {
+        if (camera instanceof THREE.OrthographicCamera) {
+          camera.zoom = 1;
+          camera.updateProjectionMatrix();
+          $store.setScale(camera.zoom); // 重置缩放比例到store
+        }
+      }
+    };
+
+    window.addEventListener('wheel', handleWheel);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [camera, controlsRef]);
+
   // 同步forwardRef和内部ref
   useEffect(() => {
     if (ref) {
