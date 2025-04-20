@@ -25,7 +25,7 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls, visible }: 
 
     const ctx = canvasRef.current?.getContext('2d');
     if (!ctx) return;
-    
+
     const handleResize = () => {
       canvasRef.current.width = width * DPR;
       canvasRef.current.height = height * DPR;
@@ -62,7 +62,7 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls, visible }: 
         ctx.stroke();
         // 使用 Math.round 来确保条件满足
         if (Math.round(x / (rulerConfig.textInterval * scale)) % 1 === 0) {
-          ctx.fillText(`${(x / (rulerConfig.tickSpacing * scale)).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, x + rulerConfig.textOffsetX, rulerConfig.tickLength + rulerConfig.textPaddingX);
+          ctx.fillText(`${(x * 3 / (rulerConfig.tickSpacing * scale)).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, x + rulerConfig.textOffsetX, rulerConfig.tickLength + rulerConfig.textPaddingX);
         }
       }
 
@@ -73,7 +73,7 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls, visible }: 
         ctx.stroke();
         // 使用 Math.round 来确保条件满足
         if (Math.round(y / (rulerConfig.textInterval * scale)) % 1 === 0) {
-          ctx.fillText(`${(y / (rulerConfig.tickSpacing * scale)).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, 2 + rulerConfig.textPaddingY, y + rulerConfig.textOffsetY);
+          ctx.fillText(`${(y * 3 / (rulerConfig.tickSpacing * scale)).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, 2 + rulerConfig.textPaddingY, y + rulerConfig.textOffsetY);
         }
       }
     };
