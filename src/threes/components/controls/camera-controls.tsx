@@ -66,7 +66,7 @@ export const CameraControls = forwardRef<any, CameraControlsProps>(({ is2D }, re
         maxZoom={10}
       />
       {/* 坐标轴和标注 */}
-      <primitive object={new THREE.AxesHelper(100)} />
+      <primitive object={new THREE.AxesHelper(1000)} />
       <Html position={[110, 0, 0]} center style={{ color: 'red', fontWeight: 'bold' }}>X</Html>
       <Html position={[0, 110, 0]} center style={{ color: 'green', fontWeight: 'bold' }}>Y</Html>
       <Html position={[0, 0, 110]} center style={{ color: 'blue', fontWeight: 'bold' }}>Z</Html>

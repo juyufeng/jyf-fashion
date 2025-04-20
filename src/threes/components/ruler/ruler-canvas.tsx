@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import $store from '@/stores/three-store';
 import useRulerSync from '@/hooks/use-ruler-sync';
+import { rulerConfig } from '@/threes/components/ruler/ruler-config'; // 导入配置
 
 interface RulerCanvasProps {
   width: number;
@@ -21,10 +22,19 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
 
     const drawRuler = () => {
       ctx.clearRect(0, 0, width, height);
-      ctx.strokeStyle = '#000';
-      ctx.lineWidth = 1;
-      ctx.font = '10px Arial';
-      ctx.fillStyle = '#000';
+      ctx.strokeStyle = rulerConfig.lineColor;
+      ctx.lineWidth = rulerConfig.lineWidth;
+      ctx.font = `${rulerConfig.textItalic ? 'italic ' : ''}${rulerConfig.textBold ? 'bold ' : ''}${rulerConfig.fontSize}px ${rulerConfig.textFont}`;
+      ctx.fillStyle = rulerConfig.textColor;
+
+      if (rulerConfig.textShadow) {
+        ctx.shadowColor = rulerConfig.textShadowColor;
+        ctx.shadowBlur = rulerConfig.textShadowBlur;
+        ctx.shadowOffsetX = rulerConfig.textShadowOffsetX;
+        ctx.shadowOffsetY = rulerConfig.textShadowOffsetY;
+      } else {
+        ctx.shadowColor = 'transparent';
+      }
 
       // 绘制水平标尺
       for (let x = 0; x < width; x += 50) {
@@ -32,7 +42,9 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
         ctx.moveTo(x, 0);
         ctx.lineTo(x, 10);
         ctx.stroke();
-        ctx.fillText(`${x}`, x + 2, 10);
+        if (x % rulerConfig.textInterval === 0) {
+          ctx.fillText(`${(x / 50).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, x + rulerConfig.textOffset, 10 + rulerConfig.textPadding);
+        }
       }
 
       // 绘制垂直标尺
@@ -41,7 +53,9 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
         ctx.moveTo(0, y);
         ctx.lineTo(10, y);
         ctx.stroke();
-        ctx.fillText(`${y}`, 2, y + 10);
+        if (y % rulerConfig.textInterval === 0) {
+          ctx.fillText(`${(y / 50).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, 2 + rulerConfig.textPadding, y + rulerConfig.textOffset);
+        }
       }
     };
 
@@ -71,7 +85,7 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
         top: 0,
         pointerEvents: 'none',
         zIndex: 101,
-        backgroundColor: 'transparent' // 移除调试背景
+        backgroundColor: 'transparent'
       }}
     />
   );
