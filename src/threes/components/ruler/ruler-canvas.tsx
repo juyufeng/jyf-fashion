@@ -9,36 +9,36 @@ interface RulerCanvasProps {
   height: number;
   mainCamera: any;
   controls: any;
+  visible: boolean; // 新增：控制标尺可见性
 }
 
 // 物理设备缩放比
 const DPR = window.devicePixelRatio || 1;
 
-const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanvasProps) => {
+const RulerCanvas = observer(({ width, height, mainCamera, controls, visible }: RulerCanvasProps) => {
   const canvasRef = useRef<any>(null);
 
   useRulerSync(canvasRef, mainCamera, controls, $store.rulerStore);
 
   useEffect(() => {
+    if (!visible) return; // 如果不可见，直接返回
+
     const ctx = canvasRef.current?.getContext('2d');
     if (!ctx) return;
 
     const handleResize = () => {
-      // 重新设置canvas的宽高
       canvasRef.current.width = width * DPR;
       canvasRef.current.height = height * DPR;
       ctx.scale(DPR, DPR);
 
-      drawRuler(); // 重新绘制标尺
+      drawRuler();
     };
 
     const drawRuler = () => {
       ctx.clearRect(0, 0, width, height);
-
-      // 绘制标尺背景
-      ctx.fillStyle = rulerConfig.backgroundColor; // 使用配置的背景颜色
-      ctx.fillRect(0, 0, width, rulerConfig.tickLength); // 绘制水平标尺背景
-      ctx.fillRect(0, 0, rulerConfig.tickLength, height); // 绘制垂直标尺背景
+      ctx.fillStyle = rulerConfig.backgroundColor;
+      ctx.fillRect(0, 0, width, rulerConfig.tickLength);
+      ctx.fillRect(0, 0, rulerConfig.tickLength, height);
 
       ctx.strokeStyle = rulerConfig.lineColor;
       ctx.lineWidth = rulerConfig.lineWidth;
@@ -54,7 +54,6 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
         ctx.shadowColor = 'transparent';
       }
 
-      // 绘制水平标尺
       for (let x = 0; x < width; x += rulerConfig.tickSpacing) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
@@ -65,7 +64,6 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
         }
       }
 
-      // 绘制垂直标尺
       for (let y = 0; y < height; y += rulerConfig.tickSpacing) {
         ctx.beginPath();
         ctx.moveTo(0, y);
@@ -77,13 +75,13 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
       }
     };
 
-    handleResize(); // 初始化时调用一次
+    handleResize();
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [width, height]);
+  }, [width, height, visible]);
 
-  return (
+  return visible ? (
     <canvas
       ref={canvasRef}
       width={width * DPR}
@@ -99,7 +97,7 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
         backgroundColor: 'transparent'
       }}
     />
-  );
+  ) : null;
 });
 
 export default RulerCanvas;

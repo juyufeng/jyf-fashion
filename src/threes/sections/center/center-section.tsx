@@ -13,6 +13,7 @@ const CenterSection = () => {
   return (
     <div style={{ width: '100%', height: '100%', position: 'relative' }}>
       <RulerCanvas
+        visible={is2D}
         width={centerWidth}
         height={centerHeight}
         mainCamera={controlsRef.current?.object}
