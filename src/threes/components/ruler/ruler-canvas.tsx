@@ -23,11 +23,23 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
     const ctx = canvasRef.current?.getContext('2d');
     if (!ctx) return;
 
-    ctx.scale(DPR, DPR);
+    const handleResize = () => {
+      // 重新设置canvas的宽高
+      canvasRef.current.width = width * DPR;
+      canvasRef.current.height = height * DPR;
+      ctx.scale(DPR, DPR);
 
+      drawRuler(); // 重新绘制标尺
+    };
 
     const drawRuler = () => {
       ctx.clearRect(0, 0, width, height);
+
+      // 绘制标尺背景
+      ctx.fillStyle = 'rgba(240, 240, 140, 0.65)'; // 设置背景颜色
+      ctx.fillRect(0, 0, width, rulerConfig.tickLength); // 绘制水平标尺背景
+      ctx.fillRect(0, 0, rulerConfig.tickLength, height); // 绘制垂直标尺背景
+
       ctx.strokeStyle = rulerConfig.lineColor;
       ctx.lineWidth = rulerConfig.lineWidth;
       ctx.font = `${rulerConfig.textItalic ? 'italic ' : ''}${rulerConfig.textBold ? 'bold ' : ''}${rulerConfig.fontSize}px ${rulerConfig.textFont}`;
@@ -49,7 +61,7 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
         ctx.lineTo(x, rulerConfig.tickLength);
         ctx.stroke();
         if (x % rulerConfig.textInterval === 0) {
-          ctx.fillText(`${(x / rulerConfig.tickSpacing).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, x + rulerConfig.textOffsetX, rulerConfig.tickLength + rulerConfig.textPaddingX); // 使用textOffsetX
+          ctx.fillText(`${(x / rulerConfig.tickSpacing).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, x + rulerConfig.textOffsetX, rulerConfig.tickLength + rulerConfig.textPaddingX);
         }
       }
 
@@ -60,22 +72,15 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
         ctx.lineTo(rulerConfig.tickLength, y);
         ctx.stroke();
         if (y % rulerConfig.textInterval === 0) {
-          ctx.fillText(`${(y / rulerConfig.tickSpacing).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, 2 + rulerConfig.textPaddingY, y + rulerConfig.textOffsetY); // 使用textOffsetY
+          ctx.fillText(`${(y / rulerConfig.tickSpacing).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, 2 + rulerConfig.textPaddingY, y + rulerConfig.textOffsetY);
         }
       }
     };
 
-    drawRuler();
+    handleResize(); // 初始化时调用一次
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === '9') {
-        $store.rulerStore.resetOrigin();
-        drawRuler(); // 重置后重新绘制标尺
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [width, height]);
 
   return (
