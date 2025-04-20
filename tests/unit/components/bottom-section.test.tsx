@@ -3,7 +3,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, fireEvent } from '../../utils/test-utils';
 import BottomSection from '../../../src/components/main/sections/bottom-section';
 import ChatStore from '../../../src/stores/chat-store';
-import { AbortType } from '../../../src/enums/abort-type';
+import { AbortType } from '../../../src/enums/abort-enums';
 
 // 模拟存储
 vi.mock('../../../src/stores/chat-store', () => ({

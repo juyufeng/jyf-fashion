@@ -1,5 +1,5 @@
 import { observable } from "mobx";
-import { AbortType } from '@/enums/abort-type';
+import { AbortType } from '@/enums/abort-enums';
 
 const $store = observable({
   chatting: false,

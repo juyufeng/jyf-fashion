@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import ChatStore from '../../../src/stores/chat-store';
-import { AbortType } from '../../../src/enums/abort-type';
+import { AbortType } from '../../../src/enums/abort-enums';
 
 describe('ChatStore 单元测试', () => {
   beforeEach(() => {

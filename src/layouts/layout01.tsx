@@ -4,6 +4,7 @@ import LayoutStore from "@/stores/layout-store";
 import { LayoutConfig } from "@/types/layout";
 
 interface Layout01Props {
+  aiBoxStyle?: CSSProperties;
   aiStyle?: CSSProperties;
   threeStyle?: CSSProperties;
   header?: ReactNode;
@@ -17,6 +18,7 @@ interface Layout01Props {
 const layoutModel: LayoutConfig = LayoutStore.fetchLayoutMode(LayoutStore.currentLayoutMode);
 
 const Layout: React.FC<Layout01Props> = ({
+  aiBoxStyle, 
   aiStyle,
   threeStyle,
   header,
@@ -34,19 +36,23 @@ const Layout: React.FC<Layout01Props> = ({
       <ToastContainer role="alert" aria-live="polite" />
 
       <div style={{
-        ...aiStyle,
+        ...aiBoxStyle,
         display: layoutModel.visibleChatView ? 'block' : 'none',
       }}>
-        {header}
-        {menu}
-        {content}
-        {footer}
-        {overlay}
+        <div style={{
+          ...aiStyle,
+        }}>
+          {header}
+          {menu}
+          {content}
+          {footer}
+          {overlay}
+        </div>
       </div>
 
       <div style={{
         ...threeStyle,
-        display: layoutModel.visibleDomainView? 'block' : 'none',
+        display: layoutModel.visibleDomainView ? 'block' : 'none',
       }}>
         {threeContent}
       </div>

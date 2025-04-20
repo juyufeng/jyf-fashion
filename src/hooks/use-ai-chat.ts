@@ -4,7 +4,7 @@ import { baseURL } from "@/configs/index";
 import Request from "@/requests/xrequest";
 import ReqStore from "@/stores/req-store";
 import { getCurrentSelectedChatId } from "@/dbs/table-chat-func";
-import { AbortType } from '@/enums/abort-type';
+import { AbortType } from '@/enums/abort-enums';
 import { useEffect } from 'react';
 
 export const useAIChat = () => {

@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import ReqStore from '../../../src/stores/req-store';
-import { AbortType } from '../../../src/enums/abort-type';
+import { AbortType } from '../../../src/enums/abort-enums';
 
 describe('ReqStore 单元测试', () => {
   beforeEach(() => {

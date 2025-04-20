@@ -6,6 +6,7 @@ export interface StyleProps {
 }
 
 export interface StylesReturn {
+  aiBoxStyle: CSSProperties;
   aiStyle: CSSProperties;
   threeStyle: CSSProperties;
   navIconStyle: CSSProperties;

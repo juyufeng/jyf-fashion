@@ -1,6 +1,6 @@
 import { observable } from "mobx";
 import ReqStore from "@/stores/req-store";
-import { AbortType } from '@/enums/abort-type';
+import { AbortType } from '@/enums/abort-enums';
 import { db } from '@/dbs/table-chat-db';
 import { 
   getCurrentSelectedChatId, 

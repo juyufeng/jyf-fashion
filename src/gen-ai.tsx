@@ -12,7 +12,7 @@ import LayoutStore from "@/stores/layout-store";
 import RouterStore from '@/stores/router-store';
 
 import { useAppStyle } from "@/styles/app.styles";
-import { AbortType } from '@/enums/abort-type';
+import { AbortType } from '@/enums/abort-enums';
 import MainContainer from '@/components/main/main-container';
 import FooterContainer from '@/components/footer/footer-container';
 import OverlayContent from '@/components/overlay/overlay-content';
@@ -78,6 +78,7 @@ function App() {
   }, [parsedMessages]);
 
   const {
+    aiBoxStyle,
     aiStyle,
     threeStyle,
     getContentMenuStyle,
@@ -145,6 +146,7 @@ function App() {
 
   return (
     <Layout01
+      aiBoxStyle={aiBoxStyle}
       aiStyle={aiStyle}
       threeStyle={threeStyle}
       header={headerContent}

@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import { AiOutlineInsertRowLeft, AiOutlineInsertRowRight } from 'react-icons/ai';
+import { AiOutlineInsertRowLeft, AiOutlineInsertRowRight, AiOutlineTable } from 'react-icons/ai';
+import { MenuRightStripType } from '@/enums/menu-right-strip-enums';
 
 export interface IconConfig {
   key: string;
@@ -15,13 +16,18 @@ const IconStyle = {
 
 export const ICON_CONFIGS: IconConfig[] = [
   {
-    key: 'left',
-    content: 'Insert Row Left',
+    key: MenuRightStripType.OnlyDomainView,
+    content: '仅仅展示工作区',
+    icon: <AiOutlineTable style={IconStyle} />
+  },
+  {
+    key: MenuRightStripType.ChatAiInsertLeftView,
+    content: '左侧展示Ai聊天区, 右侧展示工作区',
     icon: <AiOutlineInsertRowLeft style={IconStyle} />
   },
   {
-    key: 'right',
-    content: 'Insert Row Right',
+    key: MenuRightStripType.ChatAiInsertRightView,
+    content: '左侧展示工作区, 右侧展示Ai聊天区',
     icon: <AiOutlineInsertRowRight style={IconStyle} />
   }
 ];

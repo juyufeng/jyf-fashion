@@ -1,8 +1,15 @@
 import { THEME } from '@/configs/theme';
 import type { Dimensions } from '@/hooks/use-window-size';
-import  { aiChatWidth, domainWidth, domainLeft } from '@/styles/filters/layout-func';
+import  { aiChatWidth, aiChatLeft, domainWidth, domainLeft } from '@/styles/filters/layout-func';
 
 export const useContainerStyles = (dimensions: Dimensions) => ({
+  aiBoxStyle: {
+    width: `${aiChatWidth(dimensions)}px`,
+    height: `${dimensions.height}px`,
+    position:'absolute',
+    top: 0,
+    left:`${aiChatLeft(dimensions)}px`,
+  },
   aiStyle: {
     width: `${aiChatWidth(dimensions)}px`,
     height: `${dimensions.height}px`,
@@ -16,6 +23,7 @@ export const useContainerStyles = (dimensions: Dimensions) => ({
     top: 0,
     left: `${domainLeft(dimensions)}px`,
     background: 'white',
+    overflow: 'hidden',
   },
   getMinAppWidth: () => {
     if (dimensions.width < THEME.SIZES.BREAKPOINT) {
