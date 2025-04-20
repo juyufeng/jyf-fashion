@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import $store from '@/stores/three-store';
-import useRulerSync from '@/hooks/useRulerSync';
+import useRulerSync from '@/hooks/use-ruler-sync';
 
 interface RulerCanvasProps {
   width: number;

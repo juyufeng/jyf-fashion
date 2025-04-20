@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
 interface InfiniteGridProps {
@@ -15,8 +14,6 @@ export const InfiniteGrid: React.FC<InfiniteGridProps> = ({
   fade = true,
   thickness = 1,
 }) => {
-  const { camera } = useThree();
-
   // 计算当前相机视野范围，生成覆盖视野的网格
   const grid = useMemo(() => {
     // 取一个极大值，保证覆盖

@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { InfiniteGrid } from '@/threes/components/infinite-grid';
-import { CameraControls } from '@/threes/components/camera-controls';
-import RulerCanvas from '@/threes/components/ruler/RulerCanvas';
+import { InfiniteGrid } from '@/threes/components/grid/infinite-grid';
+import { CameraControls } from '@/threes/components/controls/camera-controls';
+import RulerCanvas from '@/threes/components/ruler/ruler-canvas';
 import { useWindowSize } from '@/hooks/use-window-size';
 
 const CenterSection = () => {
@@ -31,7 +31,7 @@ const CenterSection = () => {
             ? { position: [0, 0, 1000], up: [0, 1, 0], zoom: 10, near: 0.1, far: 5000 }
             : { position: [0, 0, 1000], up: [0, 1, 0], fov: 50, near: 0.1, far: 5000 }
         }
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: centerWidth, height: centerHeight }}
       >
         <CameraControls is2D={is2D} ref={controlsRef} />
         <InfiniteGrid cellSize={20} color={0x888888} fade thickness={1} />

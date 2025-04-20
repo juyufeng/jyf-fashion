@@ -2,9 +2,9 @@ import { useThree, useFrame } from '@react-three/fiber';
 import { useRef, useEffect } from 'react';
 import { OrthographicCamera, PerspectiveCamera, OrbitControls as DreiOrbitControls, Html } from '@react-three/drei';
 import * as THREE from 'three';
-import { useKeyboardControls } from '@/hooks/useKeyboardControls'; // 引入自定义 Hook
-import { useWheelZoom } from '@/hooks/useWheelZoom'; // 引入新的自定义 Hook
-import { useSpaceDrag } from '@/hooks/useSpaceDrag'; // 引入空格拖动 Hook
+import { useKeyboardControls } from '@/hooks/use-keyboard-controls'; // 引入自定义 Hook
+import { useWheelZoom } from '@/hooks/use-wheel-zoom'; // 引入新的自定义 Hook
+import { useSpaceDrag } from '@/hooks/use-space-drag'; // 引入空格拖动 Hook
 import { forwardRef } from 'react';
 
 interface CameraControlsProps {
