@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import $store from '@/stores/three-store';
 import useRulerSync from '@/hooks/use-ruler-sync';
 import { rulerConfig } from '@/threes/components/ruler/ruler-config'; // 导入配置
+import { debounce } from '@/utils/util'; // 导入防抖函数
 
 interface RulerCanvasProps {
   width: number;
@@ -21,18 +22,18 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls, visible }: 
   useRulerSync(canvasRef, mainCamera, controls, $store.rulerStore);
 
   useEffect(() => {
-    if (!visible) return; // 如果不可见，直接返回
+    if (!visible) return;
 
     const ctx = canvasRef.current?.getContext('2d');
     if (!ctx) return;
 
-    const handleResize = () => {
+    const handleResize = debounce(() => {
       canvasRef.current.width = width * DPR;
       canvasRef.current.height = height * DPR;
       ctx.scale(DPR, DPR);
 
       drawRuler();
-    };
+    }, 200);
 
     const drawRuler = () => {
       ctx.clearRect(0, 0, width, height);
