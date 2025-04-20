@@ -37,24 +37,24 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
       }
 
       // 绘制水平标尺
-      for (let x = 0; x < width; x += 50) {
+      for (let x = 0; x < width; x += rulerConfig.tickSpacing) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
-        ctx.lineTo(x, 10);
+        ctx.lineTo(x, rulerConfig.tickLength);
         ctx.stroke();
         if (x % rulerConfig.textInterval === 0) {
-          ctx.fillText(`${(x / 50).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, x + rulerConfig.textOffset, 10 + rulerConfig.textPadding);
+          ctx.fillText(`${(x / rulerConfig.tickSpacing).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, x + rulerConfig.textOffsetX, rulerConfig.tickLength + rulerConfig.textPaddingX); // 使用textOffsetX
         }
       }
 
       // 绘制垂直标尺
-      for (let y = 0; y < height; y += 50) {
+      for (let y = 0; y < height; y += rulerConfig.tickSpacing) {
         ctx.beginPath();
         ctx.moveTo(0, y);
-        ctx.lineTo(10, y);
+        ctx.lineTo(rulerConfig.tickLength, y);
         ctx.stroke();
         if (y % rulerConfig.textInterval === 0) {
-          ctx.fillText(`${(y / 50).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, 2 + rulerConfig.textPadding, y + rulerConfig.textOffset);
+          ctx.fillText(`${(y / rulerConfig.tickSpacing).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, 2 + rulerConfig.textPaddingY, y + rulerConfig.textOffsetY); // 使用textOffsetY
         }
       }
     };
@@ -75,8 +75,8 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
   return (
     <canvas
       ref={canvasRef}
-      width={width * window.devicePixelRatio}
-      height={height * window.devicePixelRatio}
+      width={width}
+      height={height}
       style={{
         width: `${width}px`,
         height: `${height}px`,
