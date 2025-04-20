@@ -20,5 +20,6 @@ export const rulerConfig = {
   textShadowOffsetX: 1, // 标尺文字阴影的水平偏移量
   textShadowOffsetY: 1, // 标尺文字阴影的垂直偏移量
   tickSpacing: 60, // 标尺刻度之间的间隔
-  tickLength: 10 // 标尺刻度线的长度
+  tickLength: 10, // 标尺刻度线的长度
+  backgroundColor: 'rgba(240, 240, 140, 0.65)', // 新增：标尺背景颜色
 };

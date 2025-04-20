@@ -36,7 +36,7 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
       ctx.clearRect(0, 0, width, height);
 
       // 绘制标尺背景
-      ctx.fillStyle = 'rgba(240, 240, 140, 0.65)'; // 设置背景颜色
+      ctx.fillStyle = rulerConfig.backgroundColor; // 使用配置的背景颜色
       ctx.fillRect(0, 0, width, rulerConfig.tickLength); // 绘制水平标尺背景
       ctx.fillRect(0, 0, rulerConfig.tickLength, height); // 绘制垂直标尺背景
 
