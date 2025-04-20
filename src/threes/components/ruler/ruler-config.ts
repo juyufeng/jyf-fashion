@@ -9,7 +9,7 @@ export const rulerConfig = {
   textOffsetX: 2, // X轴标尺文字的偏移量
   textOffsetY: 10, // Y轴标尺文字的偏移量
   textInterval: 10, // 标尺文字的显示间隔
-  textDecimalPlaces: 0, // 标尺文字保留的小数位数
+  textDecimalPlaces: 1, // 标尺文字保留的小数位数
   textUnit: ' dd', // 标尺文字的单位
   textFont: 'Arial', // 标尺文字的字体
   textBold: false, // 标尺文字是否加粗

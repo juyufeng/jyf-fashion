@@ -25,14 +25,14 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls, visible }: 
 
     const ctx = canvasRef.current?.getContext('2d');
     if (!ctx) return;
-
-    const handleResize = debounce(() => {
+    
+    const handleResize = () => {
       canvasRef.current.width = width * DPR;
       canvasRef.current.height = height * DPR;
       ctx.scale(DPR, DPR);
 
       drawRuler();
-    }, 200);
+    };
 
     const drawRuler = () => {
       const scale = $store.scale; // 使用全局状态中的缩放比例
@@ -60,7 +60,8 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls, visible }: 
         ctx.moveTo(x, 0);
         ctx.lineTo(x, rulerConfig.tickLength);
         ctx.stroke();
-        if (x % (rulerConfig.textInterval * scale) === 0) {
+        // 使用 Math.round 来确保条件满足
+        if (Math.round(x / (rulerConfig.textInterval * scale)) % 1 === 0) {
           ctx.fillText(`${(x / (rulerConfig.tickSpacing * scale)).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, x + rulerConfig.textOffsetX, rulerConfig.tickLength + rulerConfig.textPaddingX);
         }
       }
@@ -70,7 +71,8 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls, visible }: 
         ctx.moveTo(0, y);
         ctx.lineTo(rulerConfig.tickLength, y);
         ctx.stroke();
-        if (y % (rulerConfig.textInterval * scale) === 0) {
+        // 使用 Math.round 来确保条件满足
+        if (Math.round(y / (rulerConfig.textInterval * scale)) % 1 === 0) {
           ctx.fillText(`${(y / (rulerConfig.tickSpacing * scale)).toFixed(rulerConfig.textDecimalPlaces)}${rulerConfig.textUnit}`, 2 + rulerConfig.textPaddingY, y + rulerConfig.textOffsetY);
         }
       }
