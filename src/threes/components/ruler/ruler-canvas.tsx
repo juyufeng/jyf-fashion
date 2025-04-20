@@ -11,6 +11,9 @@ interface RulerCanvasProps {
   controls: any;
 }
 
+// 物理设备缩放比
+const DPR = window.devicePixelRatio || 1;
+
 const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanvasProps) => {
   const canvasRef = useRef<any>(null);
 
@@ -19,6 +22,9 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
   useEffect(() => {
     const ctx = canvasRef.current?.getContext('2d');
     if (!ctx) return;
+
+    ctx.scale(DPR, DPR);
+
 
     const drawRuler = () => {
       ctx.clearRect(0, 0, width, height);
@@ -75,8 +81,8 @@ const RulerCanvas = observer(({ width, height, mainCamera, controls }: RulerCanv
   return (
     <canvas
       ref={canvasRef}
-      width={width}
-      height={height}
+      width={width * DPR}
+      height={height * DPR}
       style={{
         width: `${width}px`,
         height: `${height}px`,

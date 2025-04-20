@@ -3,11 +3,11 @@ export const rulerConfig = {
   lineColor: 'blue', // 标尺线的颜色
   textColor: 'rgb(88, 88 , 88)', // 标尺文字的颜色
   lineWidth: 1, // 标尺线的宽度
-  fontSize: 12, // 标尺文字的字体大小
-  textPaddingX: -5, // X轴标尺文字与标尺线之间的间距
+  fontSize: 8, // 标尺文字的字体大小
+  textPaddingX: 0, // X轴标尺文字与标尺线之间的间距
   textPaddingY: 0, // Y轴标尺文字与标尺线之间的间距
   textOffsetX: 2, // X轴标尺文字的偏移量
-  textOffsetY: 15, // Y轴标尺文字的偏移量
+  textOffsetY: 10, // Y轴标尺文字的偏移量
   textInterval: 10, // 标尺文字的显示间隔
   textDecimalPlaces: 0, // 标尺文字保留的小数位数
   textUnit: ' dd', // 标尺文字的单位
@@ -19,6 +19,6 @@ export const rulerConfig = {
   textShadowBlur: 2, // 标尺文字阴影的模糊度
   textShadowOffsetX: 1, // 标尺文字阴影的水平偏移量
   textShadowOffsetY: 1, // 标尺文字阴影的垂直偏移量
-  tickSpacing: 120, // 标尺刻度之间的间隔
-  tickLength: 20 // 标尺刻度线的长度
+  tickSpacing: 60, // 标尺刻度之间的间隔
+  tickLength: 10 // 标尺刻度线的长度
 };
