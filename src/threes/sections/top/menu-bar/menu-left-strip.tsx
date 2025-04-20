@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TOP_MENU_ITEMS, MenuItem, DropdownItem } from '@/threes/sections/top/menu-config/top-menu-config';
+import { TOP_MENU_ITEMS, MenuItem, DropdownItem } from '@/threes/sections/top/menu-config/top-menu-left-strip-config';
 import { Popover, Dropdown } from 'antd';
 
 const MenuLeftStrip: React.FC = () => {
