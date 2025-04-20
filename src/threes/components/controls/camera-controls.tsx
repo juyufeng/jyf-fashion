@@ -14,7 +14,9 @@ interface CameraControlsProps {
 
 export const CameraControls = forwardRef<any, CameraControlsProps>(({ is2D }, ref) => {
   const controlsRef = useRef<any>(null);
+  // 2D
   const orthoRef = useRef<THREE.OrthographicCamera>(null);
+  // 3D
   const perspRef = useRef<THREE.PerspectiveCamera>(null);
   
   const { camera, set } = useThree(); 
@@ -28,7 +30,7 @@ export const CameraControls = forwardRef<any, CameraControlsProps>(({ is2D }, re
     controlsRef.current?.update();
   }, [is2D, set]);
 
-  useWheelZoom(camera);
+  useWheelZoom(camera, controlsRef);
   useKeyboardControls(camera);
   useSpaceDrag(camera, controlsRef);
  
